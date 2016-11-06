@@ -17,6 +17,8 @@ import com.wang.avi.AVLoadingIndicatorView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import moizest89.indigitous.com.glassrootimpact.R;
+import moizest89.indigitous.com.glassrootimpact.utility.ClickListener;
+import moizest89.indigitous.com.glassrootimpact.utility.RecyclerTouchListener;
 
 public class MainActivity extends AppCompatActivity implements IMainView{
 
@@ -48,6 +50,12 @@ public class MainActivity extends AppCompatActivity implements IMainView{
         this.mainPresenter.getData();;
 
 
+        this.recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+            }
+        }));
 
     }
 
