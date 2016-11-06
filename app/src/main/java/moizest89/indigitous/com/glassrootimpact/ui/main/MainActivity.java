@@ -14,9 +14,14 @@ import android.view.MenuItem;
 
 import com.wang.avi.AVLoadingIndicatorView;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import moizest89.indigitous.com.glassrootimpact.R;
+import moizest89.indigitous.com.glassrootimpact.Utility;
+import moizest89.indigitous.com.glassrootimpact.data.models.Request;
+import moizest89.indigitous.com.glassrootimpact.ui.request.details.RequestDetailsActivity;
 import moizest89.indigitous.com.glassrootimpact.utility.ClickListener;
 import moizest89.indigitous.com.glassrootimpact.utility.RecyclerTouchListener;
 
@@ -53,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements IMainView{
         this.recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-
+                Utility.changeActivity(MainActivity.this, RequestDetailsActivity.class, null, false);
             }
         }));
 
@@ -98,5 +103,10 @@ public class MainActivity extends AppCompatActivity implements IMainView{
     @Override
     public void showLoader() {
         this.loader.animate().alpha(1).setDuration(600);
+    }
+
+    @Override
+    public void setData(List<Request> requests) {
+        this.adapter.setData(requests);
     }
 }

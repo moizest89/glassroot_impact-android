@@ -5,13 +5,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import moizest89.indigitous.com.glassrootimpact.R;
+import moizest89.indigitous.com.glassrootimpact.data.models.Request;
 import moizest89.indigitous.com.glassrootimpact.utility.PabloPicasso;
 
 /**
@@ -21,6 +26,7 @@ import moizest89.indigitous.com.glassrootimpact.utility.PabloPicasso;
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.Holder>{
 
     private Context context;
+    private List<Request> requests = new ArrayList<>();
 
     public MainAdapter(Context context) {
         this.context = context;
@@ -38,7 +44,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.Holder>{
     public void onBindViewHolder(Holder holder, int position) {
 
 
-        //
+        Request request = this.requests.get(position);
+
+
+        holder.request_church_name.setText(request.getName());
 
         holder.request_church_logo.setBorderColor(this.context.getResources().getColor(R.color.colorAccent));
         holder.request_church_logo.setBorderWidth(1);
@@ -52,11 +61,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.Holder>{
 
     @Override
     public int getItemCount() {
-        return 10;
+        return this.requests.size();
     }
 
 
-    public void setData(){
+    public void setData(List<Request> data){
+        this.requests = data;
         this.notifyDataSetChanged();
     }
 
@@ -64,6 +74,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.Holder>{
 
         @Bind(R.id.request_church_logo)
         CircleImageView request_church_logo;
+        @Bind(R.id.request_church_name)
+        TextView request_church_name;
 
         public Holder(View itemView) {
             super(itemView);
