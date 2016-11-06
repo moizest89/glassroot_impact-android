@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import moizest89.indigitous.com.glassrootimpact.R;
 import moizest89.indigitous.com.glassrootimpact.data.models.Request;
+import moizest89.indigitous.com.glassrootimpact.data.models.Request_;
 import moizest89.indigitous.com.glassrootimpact.utility.PabloPicasso;
 
 /**
@@ -48,6 +49,19 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.Holder>{
 
 
         holder.request_church_name.setText(request.getName());
+        holder.request_church_distance.setText(request.getDistance());
+
+        List<Request_> request_s = request.getRequests();
+        
+        int size_items = request_s.size();
+        String items = "";
+
+        for (int i = 0; i < size_items; i++) {
+            items += request_s.get(i).getItem();
+        }
+
+        holder.request_church_items.setText(items);
+
 
         holder.request_church_logo.setBorderColor(this.context.getResources().getColor(R.color.colorAccent));
         holder.request_church_logo.setBorderWidth(1);
@@ -70,12 +84,20 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.Holder>{
         this.notifyDataSetChanged();
     }
 
+    public Request getData(int position){
+        return this.requests.get(position);
+    }
+
     public class Holder extends RecyclerView.ViewHolder{
 
         @Bind(R.id.request_church_logo)
         CircleImageView request_church_logo;
         @Bind(R.id.request_church_name)
         TextView request_church_name;
+        @Bind(R.id.request_church_distance)
+        TextView request_church_distance;
+        @Bind(R.id.request_church_items)
+        TextView request_church_items;
 
         public Holder(View itemView) {
             super(itemView);

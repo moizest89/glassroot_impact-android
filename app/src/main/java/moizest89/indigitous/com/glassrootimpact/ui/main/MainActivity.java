@@ -58,7 +58,11 @@ public class MainActivity extends AppCompatActivity implements IMainView{
         this.recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Utility.changeActivity(MainActivity.this, RequestDetailsActivity.class, null, false);
+
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(Utility.INTENT_SEND_DATA, adapter.getData(position));
+                Utility.changeActivity(MainActivity.this, RequestDetailsActivity.class, bundle, false);
+
             }
         }));
 
